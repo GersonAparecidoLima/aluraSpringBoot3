@@ -1,0 +1,24 @@
+http://localhost:8080/games
+http://localhost:8080/games
+http://localhost:8080/h2-console/login.jsp?jsessionid=594dc69e03c77f78db62b6a1b84a258f
+jdbc:h2:mem:testdb
+
+
+
+http://localhost:8080/medicos
+
+{
+"nome": "Rodrigo Ferreira",
+"email": "rodrigo.ferreira@voll.med",
+"crm": "123456",
+"especialidade": "ORTOPEDIA",
+"endereco": {
+    "logradouro": "rua 1",
+    "bairro": "bairro",
+    "cep": "12345678",
+    "cidade": "Brasilia",
+    "uf": "DF",
+    "numero": "1",
+    "complemento": "complemento"
+    }
+}
