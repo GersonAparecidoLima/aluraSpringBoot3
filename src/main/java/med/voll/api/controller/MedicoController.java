@@ -18,6 +18,8 @@ public class MedicoController {
 	//	System.out.println(json);
 	//}
 	
+	//métodos para as funcionalidade
+	//funcionalidade cadastrar
 	@PostMapping
 	public void cadastrar(@RequestBody DadosCadastroMedico dados) {
 		System.out.println(dados);
