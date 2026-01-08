@@ -13,6 +13,7 @@ import med.voll.api.paciente.DadosCadastroPaciente;
 public class PacienteController {
 
 	@PostMapping
+	//@Valid 
 	public void cadastrar(@RequestBody DadosCadastroPaciente dados) {
       System.out.println("Dados recebidos do paciente: " + dados);
 	}
