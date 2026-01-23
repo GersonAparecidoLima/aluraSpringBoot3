@@ -9,7 +9,7 @@ import med.voll.api.endereco.DadosEndereco;
 public record DadosCadastroPaciente(
 		
 	
-	@NotBlank // Campo obrigatório e não pode ser apenas espaços	
+	@NotBlank // Campo obrigatório e não pode ser apenas espaços, não pode ser nulo e nem vazio	
     String nome, 
     
     @NotBlank 
@@ -20,10 +20,10 @@ public record DadosCadastroPaciente(
     String telefone,
     
     @NotBlank 
-    @Pattern(regexp = "\\d{3}\\.\\d{3}\\.\\d{3}\\-\\d{2}") // Valida o formato 000.000.000-00
+    //@Pattern(regexp = "\\d{3}\\.\\d{3}\\.\\d{3}\\-\\d{2}") // Valida o formato 000.000.000-00
     String cpf, 
     
-    @NotBlank
-    @Valid // Valida também os campos dentro do objeto Endereco
+    //@NotBlank
+   // @Valid // Valida também os campos dentro do objeto Endereco
     DadosEndereco endereco) {
 }

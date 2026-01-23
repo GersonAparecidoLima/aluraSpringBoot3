@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
 import med.voll.api.paciente.DadosCadastroPaciente;
 
 @RestController
@@ -14,7 +15,7 @@ public class PacienteController {
 
 	@PostMapping
 	//@Valid 
-	public void cadastrar(@RequestBody DadosCadastroPaciente dados) {
+	public void cadastrar(@RequestBody @Valid DadosCadastroPaciente dados) {
       System.out.println("Dados recebidos do paciente: " + dados);
 	}
 
