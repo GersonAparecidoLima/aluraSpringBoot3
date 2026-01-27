@@ -1,11 +1,12 @@
 package med.voll.api.controller;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired; // ADICIONE ESTE IMPORT
 import med.voll.api.medico.DadosCadastroMedico;
+import med.voll.api.medico.DadosListagemMedico;
+import med.voll.api.medico.Medico;           // Importe a sua entidade Medico
+import med.voll.api.medico.MedicoRepository; // Importe o seu Repository
+import java.util.List;
 
 @RestController
 @RequestMapping("medicos")
@@ -18,11 +19,22 @@ public class MedicoController {
 	//	System.out.println(json);
 	//}
 	
-	//métodos para as funcionalidade
-	//funcionalidade cadastrar
-	@PostMapping
-	public void cadastrar(@RequestBody DadosCadastroMedico dados) {
-		System.out.println(dados);
-	}
-
+	
+	
+	
+    @Autowired 
+    private MedicoRepository repository;
+	
+    @PostMapping
+    public void cadastrar(@RequestBody DadosCadastroMedico dados) {
+        // Agora o dado sai do console e vai para o Banco de Dados!
+        repository.save(new Medico(dados));
+    }
+	
+    @GetMapping
+    public List<DadosListagemMedico> listar() {
+        return repository.findAll().stream()
+                .map(DadosListagemMedico::new)
+                .toList();
+    }
 }
