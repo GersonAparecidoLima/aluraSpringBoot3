@@ -1,14 +1,8 @@
 package med.voll.api.endereco;
 
 import jakarta.persistence.Embeddable;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Embeddable
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
 public class Endereco {
 
     private String logradouro;
@@ -19,6 +13,11 @@ public class Endereco {
     private String cidade;
     private String uf;
 
+    // 1. CONSTRUTOR VAZIO (O que o Hibernate precisa para não dar erro)
+    public Endereco() {
+    }
+
+    // 2. CONSTRUTOR PARA O SEU CADASTRO (O que você já usa)
     public Endereco(DadosEndereco dados) {
         this.logradouro = dados.logradouro();
         this.bairro = dados.bairro();
@@ -28,4 +27,13 @@ public class Endereco {
         this.numero = dados.numero();
         this.complemento = dados.complemento();
     }
+
+    // 3. GETTERS MANUAIS (Para o Hibernate conseguir ler os dados)
+    public String getLogradouro() { return logradouro; }
+    public String getBairro() { return bairro; }
+    public String getCep() { return cep; }
+    public String getNumero() { return numero; }
+    public String getComplemento() { return complemento; }
+    public String getCidade() { return cidade; }
+    public String getUf() { return uf; }
 }
