@@ -1,40 +1,40 @@
 package med.voll.api.controller;
 
 import org.springframework.web.bind.annotation.*;
-import org.springframework.beans.factory.annotation.Autowired; // ADICIONE ESTE IMPORT
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;      // IMPORT QUE FALTAVA
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault; // Dica extra abaixo
+
 import med.voll.api.medico.DadosCadastroMedico;
 import med.voll.api.medico.DadosListagemMedico;
-import med.voll.api.medico.Medico;           // Importe a sua entidade Medico
-import med.voll.api.medico.MedicoRepository; // Importe o seu Repository
-import java.util.List;
+import med.voll.api.medico.Medico;
+import med.voll.api.medico.MedicoRepository;
+
+//Paginação
+// http://localhost:8080/medicos?size=1&page=0
+
+//Ordenação
+//http://localhost:8080/medicos?sort=nome
+//Por padrão, a ordenação acontece de maneira crescente. Mas é possível inverter isso, ordenando por ordem decrescente. Para isso, basta adicionar ,desc à URL.
+//http://localhost8080/medicos?sort=crm,desc&size=2&page=1
 
 @RestController
 @RequestMapping("medicos")
 public class MedicoController {
-	
-	//Essa é uma das maneiras de recebermos dados nos métodos dos controllers: 
-	//declarando como string e anotando como request body, no caso de requisições do tipo post
-	//@PostMapping
-	//public void cadastrar(@RequestBody String json) {
-	//	System.out.println(json);
-	//}
-	
-	
-	
-	
+
     @Autowired 
     private MedicoRepository repository;
-	
+
     @PostMapping
     public void cadastrar(@RequestBody DadosCadastroMedico dados) {
-        // Agora o dado sai do console e vai para o Banco de Dados!
         repository.save(new Medico(dados));
     }
-	
+
     @GetMapping
-    public List<DadosListagemMedico> listar() {
-        return repository.findAll().stream()
-                .map(DadosListagemMedico::new)
-                .toList();
+    public Page<DadosListagemMedico> listar(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao) {
+        return repository.findAll(paginacao).map(DadosListagemMedico::new);
     }
+    //lista(@PageableDefault(size = 10, sort = {"nome"})
+    //o novo padrão será a exibição de 10 resultados por página, ordenados a partir do nome.
 }
