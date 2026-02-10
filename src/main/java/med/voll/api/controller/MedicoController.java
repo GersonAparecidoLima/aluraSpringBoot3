@@ -56,4 +56,13 @@ public class MedicoController {
     	var medico  = repository.getReferenceById(dados.id());
     	medico.atualizarInformacoes(dados);
     }
+    
+    //Para levar o ID, Vamos abrir parênteses e aspas após e anotação e passar o complemento da URL. 
+    //Para que seja um parâmetro dinâmico, passaremos ("/{id}")
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void excluir(@PathVariable Long id) {
+    	repository.deleteById(id);    	
+    }
+    
 }
