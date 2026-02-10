@@ -1,11 +1,15 @@
 package med.voll.api.controller;
 
 import org.springframework.web.bind.annotation.*;
+
+import jakarta.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;      // IMPORT QUE FALTAVA
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault; // Dica extra abaixo
 
+import med.voll.api.medico.DadosAtualizacaoMedico;
 import med.voll.api.medico.DadosCadastroMedico;
 import med.voll.api.medico.DadosListagemMedico;
 import med.voll.api.medico.Medico;
@@ -37,4 +41,19 @@ public class MedicoController {
     }
     //lista(@PageableDefault(size = 10, sort = {"nome"})
     //o novo padrão será a exibição de 10 resultados por página, ordenados a partir do nome.
+    
+    /*
+     *@PutMapping
+    @Transactional
+    public void atualizar(@RequestBody @Valid DadosCadastroMedico dados) {
+
+    }
+     * */
+    
+    @PutMapping
+    @Transactional
+    public void atualizar(@RequestBody DadosAtualizacaoMedico dados) {
+    	var medico  = repository.getReferenceById(dados.id());
+    	medico.atualizarInformacoes(dados);
+    }
 }
