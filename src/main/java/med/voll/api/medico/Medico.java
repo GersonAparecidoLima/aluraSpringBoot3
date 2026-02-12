@@ -23,6 +23,9 @@ public class Medico {
     @Embedded
     private Endereco endereco;
 
+     // NOVO CAMPO
+    private Boolean ativo;
+    
     // Construtor padrão
     public Medico() {}
 
@@ -39,6 +42,7 @@ public class Medico {
 
     // Construtor usando DadosCadastroMedico
     public Medico(DadosCadastroMedico dados) {
+    	this.ativo = true; // Todo médico novo nasce ativo
         this.nome = dados.nome();
         this.email = dados.email();
         this.telefone = dados.telefone();
@@ -47,6 +51,16 @@ public class Medico {
         this.endereco = new Endereco(dados.endereco());
     }
 
+ // Método para Exclusão Lógica
+    public void excluir() {
+        this.ativo = false;
+    }
+
+    // Getter para o novo campo
+    public Boolean getAtivo() {
+        return ativo;
+    }
+    
     // GETTERS MANUAIS
     public Long getId() {
         return id;
